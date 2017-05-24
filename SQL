@@ -1,0 +1,6 @@
+SELECT  id,parent_page_id,CONVERT (VARCHAR(MAX),
+case when parent_page_id=''  Then stuff((select '|'+id from 
+sample_process a where b.id=a.parent_page_id
+for xml path('')),1,1,' ')  END )as child_ids
+FROM sample_process b group by b.id,parent_page_id
+ order by 1
